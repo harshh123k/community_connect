@@ -1,0 +1,346 @@
+/* Modern gradient background */
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1rem;
+}
+
+/* Animated background shapes */
+.register-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    filter: blur(100px);
+    border-radius: 50%;
+}
+
+.shape:nth-child(1) {
+    background: rgba(78, 205, 196, 0.4);
+    width: 500px;
+    height: 500px;
+    top: -250px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape:nth-child(2) {
+    background: rgba(255, 107, 107, 0.4);
+    width: 400px;
+    height: 400px;
+    bottom: -200px;
+    left: -100px;
+    animation: float 6s ease-in-out infinite reverse;
+}
+
+/* Glass morphism effect */
+.register-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    z-index: 2;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.icon-wrapper {
+    display: inline-block;
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.icon-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.welcome-text {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+/* Form styling */
+.register-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .register-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+}
+
+.form-group label {
+    display: block;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+}
+
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.input-wrapper input::placeholder,
+.input-wrapper select::placeholder,
+.input-wrapper textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus,
+.input-wrapper textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Select input styling */
+.select-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5em;
+}
+
+/* Checkbox grid */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    accent-color: #4ecdc4;
+}
+
+.checkbox-item label {
+    color: white;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Password toggle button */
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: white;
+}
+
+/* Submit button */
+.submit-button {
+    grid-column: span 2;
+    background: #4ecdc4;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .submit-button {
+        grid-column: span 1;
+    }
+}
+
+.submit-button:hover {
+    background: #45b7b0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.4);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.submit-button.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Login link */
+.login-link {
+    grid-column: span 2;
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .login-link {
+        grid-column: span 1;
+    }
+}
+
+.login-link a {
+    color: #4ecdc4;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.login-link a:hover {
+    opacity: 0.8;
+}
+
+/* Error message */
+.error-message {
+    background: rgba(255, 86, 86, 0.2);
+    border: 1px solid rgba(255, 86, 86, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+    .error-message {
+        grid-column: span 1;
+    }
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Password strength indicator */
+.password-strength {
+    display: flex;
+    gap: 4px;
+    margin-top: 0.5rem;
+}
+
+.strength-bar {
+    height: 4px;
+    flex: 1;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.strength-bar.weak { background-color: #ff6b6b; }
+.strength-bar.fair { background-color: #ffd93d; }
+.strength-bar.good { background-color: #6bcb77; }
+.strength-bar.strong { background-color: #4ecdc4; }
+
+.password-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+} 

@@ -4,6 +4,7 @@ import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaUser, FaLock, FaEnvelope, FaBuilding, FaPhone, FaMapMarkerAlt, FaHandHoldingHeart, FaEye, FaEyeSlash, FaExclamationCircle, FaUsers, FaCertificate, FaBriefcase } from 'react-icons/fa';
 import { useToast } from '@chakra-ui/react';
+import './Register.css';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -200,85 +201,64 @@ const Register = () => {
         console.log('Available NGOs:', ngos);
         return (
             <>
-                <div className="mb-6">
-                    <label htmlFor="ngoId" className="block text-sm font-medium text-gray-700 mb-2">
-                        Select NGO *
-                    </label>
-                    <div className="relative rounded-md shadow-sm">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <FaHandHoldingHeart className="h-5 w-5 text-gray-400" />
-                        </div>
+                <div className="form-group">
+                    <label htmlFor="ngoId">Select NGO</label>
+                    <div className="input-wrapper">
+                        <FaHandHoldingHeart className="input-icon" />
                         <select
                             name="ngoId"
                             id="ngoId"
                             required
                             value={formData.ngoId}
                             onChange={handleChange}
-                            className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                             disabled={loading}
+                            className="select-input"
                         >
                             <option value="">Select an NGO</option>
-                            {ngos && ngos.length > 0 ? (
-                                ngos.map((ngo) => (
-                                    <option key={ngo._id} value={ngo._id}>
-                                        {ngo.name} ({ngo.organization})
-                                    </option>
-                                ))
-                            ) : (
-                                <option value="" disabled>No NGOs available</option>
-                            )}
+                            {ngos.map((ngo) => (
+                                <option key={ngo._id} value={ngo._id}>
+                                    {ngo.name} ({ngo.organization})
+                                </option>
+                            ))}
                         </select>
                     </div>
-                    {!formData.ngoId && (
-                        <p className="mt-1 text-sm text-red-600">
-                            Please select an NGO to continue
-                        </p>
-                    )}
                 </div>
 
-                <div className="mb-6">
-                    <label htmlFor="interests" className="block text-sm font-medium text-gray-700 mb-2">
-                        Areas of Interest
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
+                <div className="form-group">
+                    <label>Areas of Interest</label>
+                    <div className="checkbox-grid">
                         {interests.map((interest) => (
-                            <div key={interest} className="flex items-center">
+                            <div key={interest} className="checkbox-item">
                                 <input
                                     type="checkbox"
+                                    id={`interest-${interest}`}
                                     name="interests"
                                     value={interest}
                                     checked={formData.interests.includes(interest)}
                                     onChange={handleChange}
-                                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                                     disabled={loading}
                                 />
-                                <label className="ml-2 block text-sm text-gray-900">
-                                    {interest}
-                                </label>
+                                <label htmlFor={`interest-${interest}`}>{interest}</label>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="mb-6">
-                    <label htmlFor="skills" className="block text-sm font-medium text-gray-700 mb-2">
-                        Skills
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
+                <div className="form-group">
+                    <label>Skills</label>
+                    <div className="checkbox-grid">
                         {skills.map((skill) => (
-                            <div key={skill} className="flex items-center">
+                            <div key={skill} className="checkbox-item">
                                 <input
                                     type="checkbox"
+                                    id={`skill-${skill}`}
                                     name="skills"
                                     value={skill}
                                     checked={formData.skills.includes(skill)}
                                     onChange={handleChange}
-                                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                                     disabled={loading}
                                 />
-                                <label className="ml-2 block text-sm text-gray-900">
-                                    {skill}
-                                </label>
+                                <label htmlFor={`skill-${skill}`}>{skill}</label>
                             </div>
                         ))}
                     </div>
@@ -289,91 +269,72 @@ const Register = () => {
 
     const renderNGOFields = () => (
         <>
-            <div>
-                <label htmlFor="organization" className="block text-sm font-medium text-gray-700">
-                    Organization Name
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FaBuilding className="h-5 w-5 text-gray-400" />
-                    </div>
+            <div className="form-group">
+                <label htmlFor="organization">Organization Name</label>
+                <div className="input-wrapper">
+                    <FaBuilding className="input-icon" />
                     <input
-                        type="text"
-                        name="organization"
                         id="organization"
+                        name="organization"
+                        type="text"
                         required
                         value={formData.organization}
                         onChange={handleChange}
-                        className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                        placeholder="Enter your organization name"
+                        placeholder="Enter organization name"
                         disabled={loading}
                     />
                 </div>
             </div>
 
-            <div>
-                <label htmlFor="registrationNumber" className="block text-sm font-medium text-gray-700">
-                    NGO Registration Number
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FaCertificate className="h-5 w-5 text-gray-400" />
-                    </div>
+            <div className="form-group">
+                <label htmlFor="registrationNumber">Registration Number</label>
+                <div className="input-wrapper">
+                    <FaCertificate className="input-icon" />
                     <input
-                        type="text"
-                        name="registrationNumber"
                         id="registrationNumber"
+                        name="registrationNumber"
+                        type="text"
                         required
                         value={formData.registrationNumber}
                         onChange={handleChange}
-                        className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                        placeholder="Enter your NGO registration number"
+                        placeholder="Enter registration number"
                         disabled={loading}
                     />
                 </div>
             </div>
 
-            <div>
-                <label htmlFor="website" className="block text-sm font-medium text-gray-700">
-                    Website
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FaBuilding className="h-5 w-5 text-gray-400" />
-                    </div>
+            <div className="form-group">
+                <label htmlFor="website">Website</label>
+                <div className="input-wrapper">
+                    <FaBuilding className="input-icon" />
                     <input
-                        type="url"
-                        name="website"
                         id="website"
+                        name="website"
+                        type="url"
                         required
                         value={formData.website}
                         onChange={handleChange}
-                        className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                         placeholder="Enter your NGO website"
                         disabled={loading}
                     />
                 </div>
             </div>
 
-            <div>
-                <label htmlFor="interests" className="block text-sm font-medium text-gray-700">
-                    Focus Areas
-                </label>
-                <div className="mt-2 grid grid-cols-2 gap-2">
+            <div className="form-group">
+                <label>Focus Areas</label>
+                <div className="checkbox-grid">
                     {interests.map((interest) => (
-                        <div key={interest} className="flex items-center">
+                        <div key={interest} className="checkbox-item">
                             <input
                                 type="checkbox"
+                                id={`interest-${interest}`}
                                 name="interests"
                                 value={interest}
                                 checked={formData.interests.includes(interest)}
                                 onChange={handleChange}
-                                className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                                 disabled={loading}
                             />
-                            <label className="ml-2 block text-sm text-gray-900">
-                                {interest}
-                            </label>
+                            <label htmlFor={`interest-${interest}`}>{interest}</label>
                         </div>
                     ))}
                 </div>
@@ -383,22 +344,18 @@ const Register = () => {
 
     const renderGovernmentFields = () => (
         <>
-            <div>
-                <label htmlFor="department" className="block text-sm font-medium text-gray-700">
-                    Department
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FaBuilding className="h-5 w-5 text-gray-400" />
-                    </div>
+            <div className="form-group">
+                <label htmlFor="department">Department</label>
+                <div className="input-wrapper">
+                    <FaBuilding className="input-icon" />
                     <select
                         name="department"
                         id="department"
                         required
                         value={formData.department}
                         onChange={handleChange}
-                        className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                         disabled={loading}
+                        className="select-input"
                     >
                         <option value="">Select Department</option>
                         {departments.map((dept) => (
@@ -408,45 +365,35 @@ const Register = () => {
                 </div>
             </div>
 
-            <div>
-                <label htmlFor="designation" className="block text-sm font-medium text-gray-700">
-                    Designation
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FaBriefcase className="h-5 w-5 text-gray-400" />
-                    </div>
+            <div className="form-group">
+                <label htmlFor="designation">Designation</label>
+                <div className="input-wrapper">
+                    <FaBriefcase className="input-icon" />
                     <input
-                        type="text"
-                        name="designation"
                         id="designation"
+                        name="designation"
+                        type="text"
                         required
                         value={formData.designation}
                         onChange={handleChange}
-                        className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                         placeholder="Enter your designation"
                         disabled={loading}
                     />
                 </div>
             </div>
 
-            <div>
-                <label htmlFor="experience" className="block text-sm font-medium text-gray-700">
-                    Years of Experience
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FaBriefcase className="h-5 w-5 text-gray-400" />
-                    </div>
+            <div className="form-group">
+                <label htmlFor="experience">Years of Experience</label>
+                <div className="input-wrapper">
+                    <FaBriefcase className="input-icon" />
                     <input
-                        type="number"
-                        name="experience"
                         id="experience"
+                        name="experience"
+                        type="number"
                         required
                         min="0"
                         value={formData.experience}
                         onChange={handleChange}
-                        className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                         placeholder="Enter years of experience"
                         disabled={loading}
                     />
@@ -456,29 +403,147 @@ const Register = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="flex justify-center">
-                    <FaHandHoldingHeart className="h-12 w-12 text-red-600" />
-                </div>
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Join Our Community
-                </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
-                    Create an account to start making a difference
-                </p>
+        <div className="register-container">
+            <div className="register-background">
+                <div className="shape"></div>
+                <div className="shape"></div>
             </div>
+            
+            <div className="register-content">
+                <div className="register-header">
+                    <div className="icon-wrapper">
+                        <FaHandHoldingHeart className="icon-pulse" />
+                    </div>
+                    <h2 className="welcome-text">Join Our Community</h2>
+                    <p className="subtitle">Create an account to start making a difference</p>
+                </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <div className="register-form-container">
                     {error && (
-                        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md flex items-center">
-                            <FaExclamationCircle className="mr-2" />
-                            {error}
+                        <div className="error-message">
+                            <FaExclamationCircle />
+                            <span>{error}</span>
                         </div>
                     )}
-                    <form className="space-y-6" onSubmit={handleSubmit}>
-                        <div>
+                    
+                    <form className="register-form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="name">Full Name</label>
+                            <div className="input-wrapper">
+                                <FaUser className="input-icon" />
+                                <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    required
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    placeholder="Enter your full name"
+                                    disabled={loading}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="email">Email Address</label>
+                            <div className="input-wrapper">
+                                <FaEnvelope className="input-icon" />
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    required
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder="Enter your email"
+                                    disabled={loading}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="phone">Phone Number</label>
+                            <div className="input-wrapper">
+                                <FaPhone className="input-icon" />
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="tel"
+                                    required
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    placeholder="Enter your phone number"
+                                    disabled={loading}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="address">Address</label>
+                            <div className="input-wrapper">
+                                <FaMapMarkerAlt className="input-icon" />
+                                <textarea
+                                    id="address"
+                                    name="address"
+                                    required
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    rows="3"
+                                    placeholder="Enter your address"
+                                    disabled={loading}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <div className="input-wrapper">
+                                <FaLock className="input-icon" />
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type={showPassword ? "text" : "password"}
+                                    required
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    placeholder="Create a password"
+                                    disabled={loading}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="password-toggle"
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <div className="input-wrapper">
+                                <FaLock className="input-icon" />
+                                <input
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    required
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    placeholder="Confirm your password"
+                                    disabled={loading}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    className="password-toggle"
+                                >
+                                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
                             <label className="block text-sm font-medium text-gray-700">
                                 I want to register as
                             </label>
@@ -519,196 +584,20 @@ const Register = () => {
                             </div>
                         </div>
 
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                                Full Name
-                            </label>
-                            <div className="mt-1 relative rounded-md shadow-sm">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <FaUser className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    required
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    placeholder="Enter your full name"
-                                    disabled={loading}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                Email address
-                            </label>
-                            <div className="mt-1 relative rounded-md shadow-sm">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <FaEnvelope className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    required
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    placeholder="Enter your email"
-                                    disabled={loading}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                                Phone Number
-                            </label>
-                            <div className="mt-1 relative rounded-md shadow-sm">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <FaPhone className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    id="phone"
-                                    required
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    placeholder="Enter your phone number"
-                                    disabled={loading}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                                Address
-                            </label>
-                            <div className="mt-1 relative rounded-md shadow-sm">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <FaMapMarkerAlt className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <textarea
-                                    name="address"
-                                    id="address"
-                                    required
-                                    value={formData.address}
-                                    onChange={handleChange}
-                                    rows="3"
-                                    className="appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    placeholder="Enter your address"
-                                    disabled={loading}
-                                />
-                            </div>
-                        </div>
-
                         {userType === 'volunteer' && renderVolunteerFields()}
                         {userType === 'ngo' && renderNGOFields()}
                         {userType === 'government' && renderGovernmentFields()}
 
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                Password
-                            </label>
-                            <div className="mt-1 relative rounded-md shadow-sm">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <FaLock className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    id="password"
-                                    required
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    className="appearance-none block w-full pl-10 pr-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    placeholder="Enter your password"
-                                    disabled={loading}
-                                />
-                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="text-gray-400 hover:text-gray-500 focus:outline-none"
-                                    >
-                                        {showPassword ? (
-                                            <FaEyeSlash className="h-5 w-5" />
-                                        ) : (
-                                            <FaEye className="h-5 w-5" />
-                                        )}
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="mt-2">
-                                <div className="flex items-center space-x-2">
-                                    <div className={`h-1 w-1/5 rounded ${getPasswordStrength(formData.password) >= 1 ? 'bg-red-500' : 'bg-gray-200'}`}></div>
-                                    <div className={`h-1 w-1/5 rounded ${getPasswordStrength(formData.password) >= 2 ? 'bg-orange-500' : 'bg-gray-200'}`}></div>
-                                    <div className={`h-1 w-1/5 rounded ${getPasswordStrength(formData.password) >= 3 ? 'bg-yellow-500' : 'bg-gray-200'}`}></div>
-                                    <div className={`h-1 w-1/5 rounded ${getPasswordStrength(formData.password) >= 4 ? 'bg-green-500' : 'bg-gray-200'}`}></div>
-                                    <div className={`h-1 w-1/5 rounded ${getPasswordStrength(formData.password) >= 5 ? 'bg-green-500' : 'bg-gray-200'}`}></div>
-                                </div>
-                                <p className="mt-1 text-xs text-gray-500">
-                                    Password must be at least 8 characters long and contain uppercase, lowercase, numbers, and special characters
-                                </p>
-                            </div>
-                        </div>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className={`submit-button ${loading ? 'loading' : ''}`}
+                        >
+                            {loading ? 'Creating Account...' : 'Create Account'}
+                        </button>
 
-                        <div>
-                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                                Confirm Password
-                            </label>
-                            <div className="mt-1 relative rounded-md shadow-sm">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <FaLock className="h-5 w-5 text-gray-400" />
-                                </div>
-                                <input
-                                    type={showConfirmPassword ? "text" : "password"}
-                                    name="confirmPassword"
-                                    id="confirmPassword"
-                                    required
-                                    value={formData.confirmPassword}
-                                    onChange={handleChange}
-                                    className="appearance-none block w-full pl-10 pr-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    placeholder="Confirm your password"
-                                    disabled={loading}
-                                />
-                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                        className="text-gray-400 hover:text-gray-500 focus:outline-none"
-                                    >
-                                        {showConfirmPassword ? (
-                                            <FaEyeSlash className="h-5 w-5" />
-                                        ) : (
-                                            <FaEye className="h-5 w-5" />
-                                        )}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 ${
-                                    loading ? 'opacity-50 cursor-not-allowed' : ''
-                                }`}
-                            >
-                                {loading ? 'Creating account...' : 'Create account'}
-                            </button>
-                        </div>
-
-                        <div className="text-sm text-center">
-                            <Link to="/login" className="font-medium text-red-600 hover:text-red-500">
-                                Already have an account? Sign in
-                            </Link>
+                        <div className="login-link">
+                            Already have an account? <Link to="/login">Sign in</Link>
                         </div>
                     </form>
                 </div>

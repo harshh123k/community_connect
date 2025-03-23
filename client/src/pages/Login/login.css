@@ -1,0 +1,332 @@
+/* Modern gradient background */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background shapes */
+.login-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    filter: blur(100px);
+    border-radius: 50%;
+}
+
+.shape:nth-child(1) {
+    background: rgba(255, 107, 107, 0.4);
+    width: 500px;
+    height: 500px;
+    top: -250px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape:nth-child(2) {
+    background: rgba(78, 205, 196, 0.4);
+    width: 400px;
+    height: 400px;
+    bottom: -200px;
+    left: -100px;
+    animation: float 6s ease-in-out infinite reverse;
+}
+
+/* Glass morphism effect */
+.login-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    z-index: 2;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.icon-wrapper {
+    display: inline-block;
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.icon-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.welcome-text {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+/* Form styling */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Password toggle button */
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: white;
+}
+
+/* Form options */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    accent-color: #ff6b6b;
+}
+
+.forgot-password {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+}
+
+.forgot-password:hover {
+    opacity: 0.8;
+}
+
+/* Submit button */
+.submit-button {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-button:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.submit-button.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Register section */
+.register-section {
+    margin-top: 2rem;
+}
+
+.divider {
+    position: relative;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.divider span {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    padding: 0 1rem;
+    color: white;
+    position: relative;
+}
+
+.register-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.register-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.register-button.volunteer:hover {
+    background: rgba(72, 187, 120, 0.2);
+    transform: translateY(-2px);
+}
+
+.register-button.ngo:hover {
+    background: rgba(66, 153, 225, 0.2);
+    transform: translateY(-2px);
+}
+
+.register-button.government:hover {
+    background: rgba(159, 122, 234, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Error message */
+.error-message {
+    background: rgba(255, 86, 86, 0.2);
+    border: 1px solid rgba(255, 86, 86, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .login-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    .register-options {
+        grid-template-columns: 1fr;
+    }
+
+    .form-options {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+} 
